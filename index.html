@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Concept 02</title>
+<meta charset="utf-8">
+<link href="game.css" rel="stylesheet" type="text/css">
+<!--<style type="text/css">
+		html, body { height:100%; overflow:hidden; background-color:#e5ddac; }
+		#altContent
+		{
+		   width: 480px;
+		   height: 320px;
+		   position: absolute;
+		   left: 50%;
+		   top: 50%;
+		   margin-left: -240px;
+		   margin-top: -160px;
+		   border:3px #8D494D solid;
+		}
+</style>-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="stats.js"></script>
+</head>
+	<body>
+		<div id="game">
+		
+			<div id="altContent">				
+				<canvas id="gameCanvas" width="480" height="320">				
+				</canvas>
+				<p> Pulsa las flechas para moverte y salta con X</p>			
+			</div>
+			
+			<!-- Audio -->
+			<audio id="gameSoundCoin">
+				<source src="sounds/coin.ogg">
+				<source src="sounds/coin.mp3">
+			</audio>
+				<!--		<div id="gameUI">
+				<div id="gameIntro">
+					<h1>Plataforma</h1>
+					<p>This is an awesome game.</p>
+					<p><a id="gamePlay" class="button" href="">Play</a></p>
+				</div>
+				<div id="gameStats">					
+					<p><a class="gameReset" href="">Reset</a></p>
+				</div>
+				<div id="gameComplete">
+					<h1>GAME OVER!</h1>
+					
+					<p><a class="gameReset button" href="">Play again</a></p>
+				</div>-->
+			</div>
+		</div>
+	</body>
+</html>
