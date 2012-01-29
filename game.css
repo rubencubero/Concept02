@@ -1,8 +1,11 @@
 * { margin: 0; padding: 0; }
 html, body { height: 100%; width: 100%; }
-canvas { display: block; }
+canvas {
+	 display: block; 
+	 
+	 }
 body {
-	background: #26527C;
+	background: #000000; /*#26527C;*/
 	color: #fff;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 18px;
@@ -52,7 +55,9 @@ a.button:hover {
 }
 
 #gameCanvas {
-	background: #04396C;
+	position: relative;
+	top: 25px;
+	left: 25px;
 }
 
 #gameUI {
@@ -82,12 +87,13 @@ a.button:hover {
 
 #altContent
 {
-   width: 480px;
-   height: 320px;
+   width: 530px;
+   height: 370px;
    position: absolute;
    left: 50%;
    top: 50%;
    margin-left: -240px;
    margin-top: -160px;
    z-index:  2;   
+   background-image: url('images/background.jpg');
 }

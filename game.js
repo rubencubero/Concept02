@@ -147,6 +147,10 @@ $(document).ready(function() {
 		//playGame = true;
 		gameOver = false;
 		
+		//Imagenes
+		var img = new Image();
+  		img.src = 'images/star.png';
+		
 		plataformas.push(new plataforma(player.x-25,(player.y + player.h),50,10));
 		
 		// Set up keyboard event listeners
@@ -297,10 +301,10 @@ $(document).ready(function() {
 			
 		//Dibujar
 			//Player		
-				context.fillStyle = "#000000";		
+				context.fillStyle = "#FFFFFF";		
 				context.fillRect(player.x,player.y,player.w,player.h);
 			//Ojo	
-				context.fillStyle = "#FFFFFF";
+				context.fillStyle = "#000000";
 				
 				if (player.orientation == 1){								
 					context.fillRect((player.x),(player.y)+2,3,2);					
@@ -337,7 +341,7 @@ $(document).ready(function() {
 						}	
 					}																						
 					
-					context.fillStyle = "#000000";		
+					context.fillStyle = "#FFFFFF";		
 					context.fillRect(tmpPlataforma.x,tmpPlataforma.y,tmpPlataforma.w,tmpPlataforma.h);
 				};
 			//Monedas
@@ -369,6 +373,7 @@ $(document).ready(function() {
 					
 					context.fillStyle = "#FFE100";		
 					context.fillRect(tmpMoneda.x,tmpMoneda.y,tmpMoneda.w,tmpMoneda.h);
+    				//ctx.drawImage(img,tmpMoneda.x,tmpMoneda.y);
 				};
 				
 			//Enemigos
@@ -420,7 +425,7 @@ $(document).ready(function() {
 					tmpBala.x += tmpBala.vX;
 					
 					
-					context.fillStyle = "#000000";		
+					context.fillStyle = "#FFFFFFF";		
 					context.fillRect(tmpBala.x,tmpBala.y,tmpBala.w,tmpBala.h);
 				};
 			
