@@ -36,7 +36,7 @@ $(document).ready(function() {
 	    stats.update();
 	
 	}, 1000 / 60 );
-	
+	/*******************************/
 	
 	var canvas = $("#gameCanvas");
 	var context = canvas.get(0).getContext("2d");
@@ -50,8 +50,12 @@ $(document).ready(function() {
 	var xScore = 10;
 	var yScore = 20;
 	
-	//Sonidos
-	var soundCoin = $("#gameSoundCoin").get(0);
+	//Recursos
+		//Imagenes
+		var star;
+		
+		//Sonidos
+		var soundCoin = $("#gameSoundCoin").get(0);
 	
 	//Teclas
 	var xShoot = 87;
@@ -148,8 +152,8 @@ $(document).ready(function() {
 		gameOver = false;
 		
 		//Imagenes
-		var img = new Image();
-  		img.src = 'images/star.png';
+		star = new Image();
+  		star.src = 'images/star.png';
 		
 		plataformas.push(new plataforma(player.x-25,(player.y + player.h),50,10));
 		
@@ -357,23 +361,24 @@ $(document).ready(function() {
 					if ((tmpMoneda.y + tmpMoneda.h) <= 0){
 						var tmpRemoved = monedas.splice(i,1);
 						i--;
-					}else{ //Comprobar colisiones del jugador con la moneda
+					}else{ //Comprobar colisiones del jugador con la moneda						
 						if ((tmpX >= tmpMoneda.x) && (player.x <= (tmpMoneda.x + tmpMoneda.w))){											
-							if ((tmpY >= tmpMoneda.y) && (tmpY <= (tmpMoneda.y + tmpMoneda.h))){								
+							if ((tmpY >= tmpMoneda.y) && (tmpY <= (tmpMoneda.y + tmpMoneda.h))){			
+								console.log("colision");					
 								score += tmpMoneda.score;
 								soundCoin.currentTime = 0;
 								soundCoin.play();
 								var tmpRemoved = monedas.splice(i,1);
 								i--;																							
-							}					
+							}
 						}	
 					}	
 					
 					tmpMoneda.y -= velocidadScroll;
 					
-					context.fillStyle = "#FFE100";		
-					context.fillRect(tmpMoneda.x,tmpMoneda.y,tmpMoneda.w,tmpMoneda.h);
-    				//ctx.drawImage(img,tmpMoneda.x,tmpMoneda.y);
+					/*context.fillStyle = "#FFE100";		
+					context.fillRect(tmpMoneda.x,tmpMoneda.y,tmpMoneda.w,tmpMoneda.h);*/
+    				context.drawImage(star,tmpMoneda.x,tmpMoneda.y - (tmpMoneda.h/2));
 				};
 				
 			//Enemigos
@@ -443,20 +448,31 @@ $(document).ready(function() {
 		tmpTimer ++;
 		
 		//Añadir nueva plataforma
-		if (tmpTimer == 40){
-			
-			plataformas.push (new plataforma((Math.random()*480-50),canvasHeight,(Math.random()*50)+50,10))
+		if (tmpTimer == 40){			
+			var newX = Math.random()*canvasWidth;			
+			if (newX >=430){
+				newX -= 50;
+			}
+			plataformas.push (new plataforma(newX,canvasHeight,(Math.random()*50)+50,10))
 			
 			if (Math.round(Math.random())==1){
 				//Añadir modenas
-					var lastPlataforma = plataformas[plataformas.length - 1];
-					monedas.push (new moneda(lastPlataforma.x + (lastPlataforma.w/2),lastPlataforma.y - 10,10,10,50));
+				var lastPlataforma = plataformas[plataformas.length - 1];
+									
+				var newXMoneda = (Math.random()*lastPlataforma.w);
+				console.log ("x: "+lastPlataforma.x + " | w: "+lastPlataforma.w +" | newX: "+newXMoneda);
+				if (newXMoneda >= lastPlataforma.w - 30){
+					newXMoneda -=30;
+				} 
+				newXMoneda += lastPlataforma.x;
+				
+					monedas.push (new moneda(newXMoneda,lastPlataforma.y - 10,30,30,50 /* score */));
 			};
 			
 			if (Math.round(Math.random())==1){
 				//Añadir enemigo
 					var lastPlataforma = plataformas[plataformas.length - 1];
-					enemigos.push (new enemigo(lastPlataforma.x + (lastPlataforma.w/2),lastPlataforma.y - 10,10,10,lastPlataforma.x,lastPlataforma.w));
+					//enemigos.push (new enemigo(lastPlataforma.x + (lastPlataforma.w/2),lastPlataforma.y - 10,10,10,lastPlataforma.x,lastPlataforma.w));
 			};
 			tmpTimer = 0;
 		}		
